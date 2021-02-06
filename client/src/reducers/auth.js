@@ -1,4 +1,4 @@
-// { type: 'LOGGED_IN_USER', payload: {name: 'Ryan', role: 'Seller'} }
+
 export const authReducer = (
   state = { },
   action
