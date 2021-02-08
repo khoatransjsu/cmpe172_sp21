@@ -14,7 +14,7 @@ const TopNav = () => (
             <Nav className='ml-auto'>
               <LinkContainer to='/register'>
                 <Nav.Link>
-                  <i className='fas fa-shopping-cart'></i> Register
+                  <i className='fas fa-user-plus'></i> Register
                 </Nav.Link>
               </LinkContainer>
               
