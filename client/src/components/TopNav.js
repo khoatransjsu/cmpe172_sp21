@@ -1,33 +1,45 @@
-import { Link, Route } from "react-router-dom";
-import { LinkContainer } from 'react-router-bootstrap'
-import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
-const TopNav = () => (
-  <header>
-      <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
-        <Container>
-          <LinkContainer to='/'>
-            <Navbar.Brand>Home</Navbar.Brand>
-          </LinkContainer>
-          <Navbar.Toggle aria-controls='basic-navbar-nav' />
-          <Navbar.Collapse id='basic-navbar-nav'>      
-            <Nav className='ml-auto'>
-              <LinkContainer to='/register'>
-                <Nav.Link>
-                  <i className='fas fa-user-plus'></i> Register
-                </Nav.Link>
-              </LinkContainer>
-              
-                <LinkContainer to='/login'>
-                  <Nav.Link>
-                    <i className='fas fa-user'></i> Log In
-                  </Nav.Link>
-                </LinkContainer>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-    </header>
-);
+const TopNav = () => {
+  const dispatch = useDispatch();
+  const { auth } = useSelector((state) => ({ ...state }));
+  const history = useHistory();
+
+  const logout = () => {
+    dispatch({
+      type: "LOGOUT",
+      payload: null,
+    });
+    window.localStorage.removeItem("auth");
+    history.push("/login");
+  };
+
+  return (
+    <div className="nav bg-light d-flex justify-content-between">
+      <Link className="nav-link" to="/">
+        Home
+      </Link>
+
+      {auth !== null && (
+        <a className="nav-link pointer" onClick={logout}>
+          Logout
+        </a>
+      )}
+
+      {auth === null && (
+        <>
+          <Link className="nav-link" to="/login">
+            Login
+          </Link>
+          <Link className="nav-link" to="/register">
+            Register
+          </Link>
+        </>
+      )}
+    </div>
+  );
+};
 
 export default TopNav;

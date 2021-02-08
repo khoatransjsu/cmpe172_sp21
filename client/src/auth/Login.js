@@ -2,18 +2,26 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { login } from "../actions/auth";
 import LoginForm from "../components/LoginForm";
+import {useDispatch} from 'react-redux';
 
-const Login = () => {
+const Login = ({history}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try{
       let res = await login({email, password});
-      console.log('Login Data', res);
+      
       if (res.data){
-        console.log(res.data);
+        window.localStorage.setItem('auth',JSON.stringify(res.data));
+        dispatch ({
+          type: "LOGGED_IN_USER",
+          payload: res.data,
+        });
+        history.push('/');
       }
     }catch(err){
       console.log(err);
