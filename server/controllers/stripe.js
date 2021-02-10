@@ -29,7 +29,6 @@ export const createConnectAccount = async (req, res) => {
   });
   
   let link = `${accountLink.url}?${queryString.stringify(accountLink)}`;
-  console.log("LOGIN LINK", link);
   res.send(link);
   
 };
