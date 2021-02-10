@@ -15,10 +15,10 @@ const DashboardSeller = () => {
     setLoading(true);
     try {
       let res = await createConnectAccount(auth.token);
-      console.log(res); // get login link
+      console.log(res); 
     } catch (err) {
       console.log(err);
-      toast.error("Stripe connect failed, Try again.");
+      toast.error("Account Connects Failed, Try again.");
       setLoading(false);
     }
   };
@@ -46,22 +46,15 @@ const DashboardSeller = () => {
             <HomeOutlined className="h1" />
             <h4>Setup payouts to post hotel rooms</h4>
             <p className="lead">
-              We are partner with stripe to transfer earnings to your bank
-              account
+            You'll be redirected to the Checkout Page to complete your payment
             </p>
             <button
               disabled={loading}
               onClick={handleClick}
               className="btn btn-primary mb-3"
             >
-              {loading ? "Processing..." : "Setup Payouts"}
+              {loading ? "Processing..." : "Setup Payment"}
             </button>
-            <p className="text-muted">
-              <small>
-                You'll be redirected to Checkout to complete the onboarding
-                process.
-              </small>
-            </p>
           </div>
         </div>
       </div>
